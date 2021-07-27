@@ -1,0 +1,273 @@
+﻿<Window x:Class="WpfPracticalProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPracticalProject"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!-- Tables List -->
+        <Grid
+             Grid.Column ="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <ListBox
+                x:Name="tablesList"
+                Grid.Row ="0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Margin="2"
+                Background="LightYellow"
+                ItemsSource="{Binding TablesList, Mode=OneWay}"
+                SelectedItem="{Binding SelectedTable, Mode=OneWayToSource}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            FontSize="32"
+                            Text="{Binding TableName}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <!-- Panel -->
+            <Grid
+                Grid.Row ="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <!-- Edit Table Button -->
+                <Button
+                    Grid.Column ="0"
+                    Content="Add"
+                    Margin="2"/>
+                <!-- Edit Table Button -->
+                <Button
+                    Grid.Column ="1"
+                    Content="Edit"
+                    Margin="2"/>
+                <!-- Delete Table Button -->
+                <Button
+                    Grid.Column ="2"
+                    Content="Delete"
+                    Margin="2"/>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column ="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="0.5*"/>
+            </Grid.RowDefinitions>
+            <!-- Table Details -->
+            <Grid
+                Grid.Column ="0"
+                Grid.ColumnSpan="2"
+                DataContext = "{Binding SelectedTable, UpdateSourceTrigger=PropertyChanged}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+                <!-- Table Name -->
+                <TextBlock
+                    Grid.Column ="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row ="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="AntiqueWhite"
+                    Text="{Binding TableName, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- Table Type -->
+                <TextBlock
+                    Grid.Column ="0"
+                    Grid.ColumnSpan="2"
+                    Grid.Row ="1"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="AntiqueWhite"
+                    Text="{Binding TableType, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- Status -->
+                <TextBlock
+                    Grid.Column ="0"
+                    Grid.Row ="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="AntiqueWhite"
+                    Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"/>
+                <!-- Timer -->
+                <TextBlock
+                    Grid.Column ="1"
+                    Grid.Row ="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="CadetBlue"
+                    Text="Timer"/>
+                <!-- Start/Stop Button -->
+                <Button
+                    Grid.Column ="0"
+                    Grid.Row ="3"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="MediumSpringGreen"
+                    Content="Start/Stop Button"/>
+                <!-- Booking Button -->
+                <Button
+                    Grid.Column ="1"
+                    Grid.Row ="3"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="MediumSpringGreen"
+                    Content="Booking Button"/>
+                <!-- Image -->
+                <TextBlock
+                    Grid.Column ="2"
+                    Grid.Row ="0"
+                    Grid.RowSpan="4"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="LightYellow"
+                    Text="Image/Video/Whatever (TBD)"/>
+            </Grid>
+            <!-- Booking List -->
+            <ListBox
+                Grid.Column ="0"
+                Grid.Row ="1"
+                Grid.RowSpan="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Margin="2"
+                Background="LightYellow"
+                ItemsSource="{Binding TableBookingsList, Mode=OneWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            FontSize="32"
+                            Text="{Binding ID}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Grid
+                Grid.Column ="1"
+                Grid.Row ="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <!-- Booked by -->
+                <TextBlock
+                    Grid.Row ="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="AntiqueWhite"
+                    Text="Booked by (NAME/PHONE)"/>
+                <!-- Booked from -->
+                <TextBlock
+                    Grid.Row ="1"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="AntiqueWhite"
+                    Text="Booked from (DATE)"/>
+                <!-- Booked for -->
+                <TextBlock
+                    Grid.Row ="2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="AntiqueWhite"
+                    Text="Booked for (TIME)"/>
+                <!-- Panel -->
+                <Grid
+                    Grid.Row ="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- Edit Booking Button -->
+                    <Button
+                        Grid.Column ="1"
+                        Content="E"
+                        Margin="2"/>
+                    <!-- Delete Booking Button -->
+                    <Button
+                        Grid.Column ="2"
+                        Content="D"
+                        Margin="2"/>
+                </Grid>
+            </Grid>
+            <Grid
+                Grid.Column ="1"
+                Grid.Row ="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <!-- Client Name -->
+                <TextBlock
+                    Grid.Row ="0"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="AntiqueWhite"
+                    Text="Client Name"/>
+                <!-- Client Phone -->
+                <TextBlock
+                    Grid.Row ="1"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Margin="2"
+                    Background="AntiqueWhite"
+                    Text="Client Phone"/>
+                <!-- Panel -->
+                <Grid
+                    Grid.Row ="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- Edit Client Button -->
+                    <Button
+                        Grid.Column ="1"
+                        Content="E"
+                        Margin="2"/>
+                    <!-- Delete Client Button -->
+                    <Button
+                        Grid.Column ="2"
+                        Content="D"
+                        Margin="2"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
