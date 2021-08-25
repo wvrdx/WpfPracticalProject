@@ -1,0 +1,92 @@
+﻿<Window
+    x:Name="CreationEditingWindow"
+    x:Class="WpfPracticalProject.Windows.TableCreationEditingWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:WpfPracticalProject.Windows"
+    mc:Ignorable="d"
+    Title="{Binding WindowTitle, Mode=OneWay}"
+    Height="450"
+    Width="800"
+    ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                    Source="/Common/Styles/CreateEditWindowStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="50" />
+            <ColumnDefinition />
+            <ColumnDefinition
+                Width="50" />
+            <ColumnDefinition />
+            <ColumnDefinition
+                Width="50" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition
+                Height="50" />
+            <RowDefinition />
+            <RowDefinition
+                Height="50" />
+            <RowDefinition />
+            <RowDefinition
+                Height="50" />
+            <RowDefinition />
+            <RowDefinition
+                Height="50" />
+        </Grid.RowDefinitions>
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="Table Name :" />
+        <TextBlock
+            Grid.Row="3"
+            Grid.Column="1"
+            Text="Table Type :" />
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="3"
+            Text="{Binding Path=ActiveTableName, Mode=TwoWay}" />
+        <ComboBox
+            x:Name="tableTypeComboBox"
+            Grid.Row="3"
+            Grid.Column="3"
+            ItemsSource="{Binding Path=TypesList, Mode=OneWay}"
+            SelectedItem="{Binding Path=ActiveTableType, Mode=OneWayToSource}"
+            SelectedIndex="{Binding Path=ActiveTableTypeIndex, Mode=OneWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock
+                        Style="{StaticResource comboBoxItem}"
+                        Text="{Binding Path=TypeName, Mode=OneWay}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button
+            x:Name="cancelButton"
+            Grid.Row="5"
+            Grid.Column="1"
+            Content="Cancel"
+            Click="cancelButton_Click"/>
+        <Button
+            Grid.Row="5"
+            Grid.Column="3"
+            Content="Create"
+            Visibility="{Binding AddButtonVisiblity}"
+            Command="{Binding AddTableCommand}"/>
+        <Button
+            Grid.Row="5"
+            Grid.Column="3"
+            Content="Save"
+            Visibility="{Binding SaveButtonVisiblity}"
+            Command="{Binding SaveTableCommand}"/>
+    </Grid>
+</Window>

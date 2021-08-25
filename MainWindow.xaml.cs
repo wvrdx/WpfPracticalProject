@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using System.Windows;
+﻿using System.Windows;
 
 namespace WpfPracticalProject
 {
@@ -11,7 +10,7 @@ namespace WpfPracticalProject
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new TableViewModel();
+            DataContext = new ApplicationViewModel();
         }
     }
 }

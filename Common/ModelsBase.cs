@@ -6,14 +6,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfPracticalProject.Models
+namespace WpfPracticalProject.Common
 {
-    public class Client : INotifyPropertyChanged
+    public class ModelsBase : INotifyPropertyChanged
     {
-        public int ID { get; set; }
-        public string ClientName { get; set; }
-        public string ClientPhone { get; set; }
-        public float DiscountRate { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {

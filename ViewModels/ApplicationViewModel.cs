@@ -4,16 +4,17 @@ using System.Data.Entity;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using WpfPracticalProject.Models;
+using WpfPracticalProject.ViewModels;
+using WpfPracticalProject.Common;
 
 namespace WpfPracticalProject
 {
-    class TableViewModel : INotifyPropertyChanged
+    class ApplicationViewModel : ViewModelBase
     {
-        private Table _selectedTable;
-        private AppDataBaseContext db;
-        private List<Table> _tablesList;
-        private List<Booking> _tableBookingsList;
-        public Table SelectedTable
+        private TableToView _selectedTable;
+        private bool _isTableSelected;
+        private Dictionary<string, object> _selectedColumns;
+        public TableToView SelectedTable
         {
             get
             {
@@ -21,60 +22,42 @@ namespace WpfPracticalProject
             }
             set
             {
-                _selectedTable = value;
-                db.Bookings.Load();
-                _tableBookingsList = db.Bookings.Local.ToList();
-                if (_selectedTable != null)
+                if(value != null)
                 {
-                    var tableBookingsList = from b in _tableBookingsList
-                                            where b.TableID.Equals(_selectedTable.ID)
-                                            select b;
-                    _tableBookingsList = tableBookingsList.ToList();
+                    _selectedTable = value;
+                    IsTableSelected = true;
                 }
                 else
                 {
-                    _tableBookingsList = new List<Booking> { };
+                    _selectedTable = value;
+                    IsTableSelected = false;
                 }
-                OnPropertyChanged("TableBookingsList");
-                OnPropertyChanged("SelectedTable");
+                NotifyPropertyChanged("SelectedTable");
             }
         }
-        public List<Table> TablesList
+        public bool IsTableSelected
         {
             get
             {
-                _tablesList = GetTablesList();
-                return _tablesList;
+                return _isTableSelected;
             }
             set
             {
-                _tablesList = value;
-                OnPropertyChanged("TablesList");
+                _isTableSelected = value;
+                NotifyPropertyChanged("IsTableSelected");
             }
         }
-        private List<Table> GetTablesList()
-        {
-            db = new AppDataBaseContext();
-            db.Tables.Load();
-            return db.Tables.Local.ToList();
-        }
-        public List<Booking> TableBookingsList
+        public Dictionary<string, object> SelectedColumns
         {
             get
             {
-                return _tableBookingsList;
+                return _selectedColumns;
             }
             set
             {
-                _tableBookingsList = value;
-                OnPropertyChanged("TableBookingsList");
+                _selectedColumns = value;
+                NotifyPropertyChanged("SelectedColumns");
             }
-        }
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
