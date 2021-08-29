@@ -1,46 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Collections.Generic;
 using WpfPracticalProject.Common;
 
 namespace WpfPracticalProject.ViewModels.Common
 {
-    class MultiSelectionComboBoxViewModel : ViewModelBase
+    internal class MultiSelectionComboBoxViewModel : ViewModelBase
     {
-
         private Dictionary<string, object> _items;
         private Dictionary<string, object> _selectedColumns;
-
-
-        public Dictionary<string, object> Items
-        {
-            get
-            {
-                return _items;
-            }
-            set
-            {
-                _items = value;
-                NotifyPropertyChanged("Items");
-            }
-        }
-
-        public Dictionary<string, object> SelectedColumns
-        {
-            get
-            {
-                return _selectedColumns;
-            }
-            set
-            {
-                _selectedColumns = value;
-                NotifyPropertyChanged("SelectedColumns");
-            }
-        }
-
 
 
         public MultiSelectionComboBoxViewModel()
@@ -54,6 +20,27 @@ namespace WpfPracticalProject.ViewModels.Common
             SelectedColumns.Add("Table Name", 1);
             SelectedColumns.Add("Table Type", 2);
             SelectedColumns.Add("Status", 3);
+        }
+
+
+        public Dictionary<string, object> Items
+        {
+            get => _items;
+            set
+            {
+                _items = value;
+                NotifyPropertyChanged("Items");
+            }
+        }
+
+        public Dictionary<string, object> SelectedColumns
+        {
+            get => _selectedColumns;
+            set
+            {
+                _selectedColumns = value;
+                NotifyPropertyChanged("SelectedColumns");
+            }
         }
     }
 }

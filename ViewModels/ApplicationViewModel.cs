@@ -1,28 +1,21 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data.Entity;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using WpfPracticalProject.Models;
-using WpfPracticalProject.ViewModels;
 using WpfPracticalProject.Common;
+using WpfPracticalProject.Models;
 
 namespace WpfPracticalProject
 {
-    class ApplicationViewModel : ViewModelBase
+    internal class ApplicationViewModel : ViewModelBase
     {
-        private TableToView _selectedTable;
         private bool _isTableSelected;
         private Dictionary<string, object> _selectedColumns;
+        private TableToView _selectedTable;
+
         public TableToView SelectedTable
         {
-            get
-            {
-                return _selectedTable;
-            }
+            get => _selectedTable;
             set
             {
-                if(value != null)
+                if (value != null)
                 {
                     _selectedTable = value;
                     IsTableSelected = true;
@@ -32,27 +25,24 @@ namespace WpfPracticalProject
                     _selectedTable = value;
                     IsTableSelected = false;
                 }
+
                 NotifyPropertyChanged("SelectedTable");
             }
         }
+
         public bool IsTableSelected
         {
-            get
-            {
-                return _isTableSelected;
-            }
+            get => _isTableSelected;
             set
             {
                 _isTableSelected = value;
                 NotifyPropertyChanged("IsTableSelected");
             }
         }
+
         public Dictionary<string, object> SelectedColumns
         {
-            get
-            {
-                return _selectedColumns;
-            }
+            get => _selectedColumns;
             set
             {
                 _selectedColumns = value;

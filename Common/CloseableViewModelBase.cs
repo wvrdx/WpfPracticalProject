@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WpfPracticalProject.Common
 {
@@ -12,10 +8,7 @@ namespace WpfPracticalProject.Common
 
         protected void OnClosingRequest()
         {
-            if (this.ClosingRequest != null)
-            {
-                this.ClosingRequest(this, EventArgs.Empty);
-            }
+            if (ClosingRequest != null) ClosingRequest(this, EventArgs.Empty);
         }
     }
 }

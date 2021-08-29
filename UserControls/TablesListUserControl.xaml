@@ -4,10 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="clr-namespace:WpfPracticalProject"
     xmlns:commonuc="clr-namespace:WpfPracticalProject.UserControls.Common"
-    xmlns:common="clr-namespace:WpfPracticalProject.Common"
-    xmlns:uc="clr-namespace:WpfPracticalProject.UserControls"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800">
@@ -47,15 +44,15 @@
                     <GridViewColumn
                         DisplayMemberBinding="{Binding TableName, Mode=OneWay}"
                         Width="120"
-                        Header="Table Name"/>
+                        Header="Table Name" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding TableType, Mode=OneWay}"
                         Width="120"
-                        Header="Table Type"/>
+                        Header="Table Type" />
                     <GridViewColumn
                         DisplayMemberBinding="{Binding TableStatus, Mode=OneWay}"
                         Width="120"
-                        Header="Status"/>
+                        Header="Status" />
                 </GridView>
             </ListView.View>
         </ListView>
