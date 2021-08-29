@@ -13,17 +13,21 @@ namespace WpfPracticalProject.ViewModels
 {
     public class TablesListViewModel : ViewModelBase
     {
-        private AppDataBaseContext db = new AppDataBaseContext();
         private List<TableToView> _tablesListToView;
-        private RelayCommand _deleteTableCommand;
+        private RelayCommand _refreshTablesListCommand;
         private List<Table> _loadedTables;
         private List<TableType> _loadedTableTypes;
         private List<TableStatus> _loadedTableStatuses;
+
+        public TablesListViewModel()
+        {
+            _tablesListToView = GetTablesList();
+        }
+
         public List<TableToView> TablesListToView
         {
             get
             {
-                _tablesListToView = GetTablesList();
                 return _tablesListToView;
             }
             set
@@ -32,9 +36,9 @@ namespace WpfPracticalProject.ViewModels
                 NotifyPropertyChanged("TablesListToView");
             }
         }
-
         private List<TableToView> GetTablesList()
         {
+            AppDataBaseContext db = new AppDataBaseContext();
             List<TableToView> _tableListElements = new List<TableToView>();
             db.Tables.Load();
             db.TableTypes.Load();
@@ -42,34 +46,31 @@ namespace WpfPracticalProject.ViewModels
             _loadedTables = db.Tables.Local.ToList();
             _loadedTableTypes = db.TableTypes.Local.ToList();
             _loadedTableStatuses = db.TableStatuses.Local.ToList();
-            foreach(Table iteratedTable in _loadedTables)
+            foreach (Table iteratedTable in _loadedTables)
             {
                 TableToView tableListElementToAppend = new TableToView();
                 tableListElementToAppend.ID = iteratedTable.ID;
                 tableListElementToAppend.TableName = iteratedTable.TableName;
                 tableListElementToAppend.TableTypeID = (from type in _loadedTableTypes
-                                                      where type.ID.Equals(iteratedTable.TypeID)
-                                                      select type.ID).First();
+                                                        where type.ID.Equals(iteratedTable.TypeID)
+                                                        select type.ID).First();
                 tableListElementToAppend.TableType = (from type in _loadedTableTypes
-                                                     where type.ID.Equals(iteratedTable.TypeID)
-                                                     select type.TypeName).First().ToString();
+                                                      where type.ID.Equals(iteratedTable.TypeID)
+                                                      select type.TypeName).First().ToString();
                 tableListElementToAppend.TableStatus = (from status in _loadedTableStatuses
-                                                       where status.ID.Equals(iteratedTable.StatusID)
-                                                       select status.StatusName).First().ToString();
+                                                        where status.ID.Equals(iteratedTable.StatusID)
+                                                        select status.StatusName).First().ToString();
                 _tableListElements.Add(tableListElementToAppend);
             }
             return _tableListElements;
         }
-        public RelayCommand DeleteTableCommand
+        public RelayCommand RefreshTablesListCommand
         {
             get
             {
-                return _deleteTableCommand ?? (_deleteTableCommand = new RelayCommand(obj =>
+                return _refreshTablesListCommand ?? (_refreshTablesListCommand = new RelayCommand(obj =>
                 {
-                    Table tableToDelete = new Table();
-                    db.Tables.Remove(tableToDelete);
-                    db.SaveChanges();
-                    NotifyPropertyChanged("TablesListToView");
+                    TablesListToView = GetTablesList();
                 }));
             }
         }

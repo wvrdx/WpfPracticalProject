@@ -10,7 +10,8 @@
     Title="{Binding WindowTitle, Mode=OneWay}"
     Height="450"
     Width="800"
-    ResizeMode="NoResize">
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

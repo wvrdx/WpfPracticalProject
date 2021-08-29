@@ -83,7 +83,7 @@
                 Grid.Column="2"
                 Content="Delete"
                 IsEnabled="{Binding DataContext.IsTableSelected, RelativeSource={RelativeSource AncestorType=Window}}"
-                Command="{Binding DeleteTableCommand}" />
+                Click="Delete_Button_Click" />
         </Grid>
     </Grid>
 </UserControl>

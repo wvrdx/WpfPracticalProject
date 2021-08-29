@@ -86,6 +86,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppDataBaseContext.cs" />
+    <Compile Include="Common\CloseableViewModelBase.cs" />
     <Compile Include="Common\ICloseable.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\ModelsBase.cs" />
@@ -105,13 +106,21 @@
     <Compile Include="ViewModels\BookingsListViewModel.cs" />
     <Compile Include="ViewModels\Common\MultiSelectionComboBoxViewModel.cs" />
     <Compile Include="ViewModels\TableCreateEditingViewModel.cs" />
+    <Compile Include="ViewModels\TableDeletionViewModel.cs" />
     <Compile Include="ViewModels\TableParametersViewModel.cs" />
     <Compile Include="ViewModels\TablesListViewModel.cs" />
     <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="Windows\TableCreationEditingWindow.xaml.cs">
       <DependentUpon>TableCreationEditingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\TableDeletionWindow.xaml.cs">
+      <DependentUpon>TableDeletionWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Common\Styles\CreateEditWindowStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Common\Styles\TableDeletionWindowStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\TableCreationEditingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TableDeletionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,9 +6,8 @@ using WpfPracticalProject.Models;
 
 namespace WpfPracticalProject.ViewModels
 {
-    class TableCreateEditingViewModel : ViewModelBase
+    class TableCreateEditingViewModel : CloseableViewModelBase
     {
-        private AppDataBaseContext db = new AppDataBaseContext();
         private List<TableType> _typesList;
         private TableType _activeTableType;
         private bool _isAddButtonVisible;
@@ -110,15 +109,16 @@ namespace WpfPracticalProject.ViewModels
         {
             _isAddButtonVisible = false;
             _isSaveButtonVisible = true;
-            _windowTitle = $"Edit Table \"{SelectedTable.TableName}\"";
+            _activeTableName = SelectedTable.TableName;
+            _windowTitle = $"Edit Table \"{_activeTableName}\"";
             TableType _tableType = (from t in TypesList
                                     where t.ID.Equals(SelectedTable.TableTypeID)
                                     select t).First();
             _activeTableTypeIndex = _typesList.IndexOf(_tableType);
-            _activeTableName = SelectedTable.TableName;
         }
         private List<TableType> GetTablesTypesList()
         {
+            AppDataBaseContext db = new AppDataBaseContext();
             db.TableTypes.Load();
             return db.TableTypes.Local.ToList();
         }
@@ -126,6 +126,7 @@ namespace WpfPracticalProject.ViewModels
         {
             get
             {
+                AppDataBaseContext db = new AppDataBaseContext();
                 return _addTableCommand ?? (_addTableCommand = new RelayCommand(obj =>
                 {
                     Table table = new Table()
@@ -136,6 +137,7 @@ namespace WpfPracticalProject.ViewModels
                     };
                     db.Tables.Add(table);
                     db.SaveChanges();
+                    OnClosingRequest();
                 }));
             }
         }

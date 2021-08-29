@@ -23,10 +23,13 @@ namespace WpfPracticalProject.UserControls
     /// </summary>
     public partial class TablesListUserControl : UserControl
     {
+        private TablesListViewModel vm;
+
         public TablesListUserControl()
         {
             InitializeComponent();
-            DataContext = new TablesListViewModel();
+            vm = new TablesListViewModel();
+            DataContext = vm;
         }
 
         private void Edit_Button_Click(object sender, RoutedEventArgs e)
@@ -34,17 +37,30 @@ namespace WpfPracticalProject.UserControls
             TableToView SelectedTable = (TableToView)tablesListView.SelectedItem;
             TableCreationEditingWindow m = new TableCreationEditingWindow(SelectedTable);
             m.ShowDialog();
+            if (m.DialogResult.HasValue && m.DialogResult.Value)
+                vm.RefreshTablesListCommand.Execute(null);
         }
         private void Add_Button_Click(object sender, RoutedEventArgs e)
         {
             TableCreationEditingWindow m = new TableCreationEditingWindow();
             m.ShowDialog();
+            if (m.DialogResult.HasValue && m.DialogResult.Value)
+                vm.RefreshTablesListCommand.Execute(null);
         }
         private void tablesListView_MouseDown(object sender, MouseButtonEventArgs e)
         {
             HitTestResult r = VisualTreeHelper.HitTest(this, e.GetPosition(this));
             if (r.VisualHit.GetType() != typeof(ListViewItem))
                 tablesListView.UnselectAll();
+        }
+
+        private void Delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+            TableToView SelectedTable = (TableToView)tablesListView.SelectedItem;
+            TableDeletionWindow m = new TableDeletionWindow(SelectedTable);
+            m.ShowDialog();
+            if (m.DialogResult.HasValue && m.DialogResult.Value)
+                vm.RefreshTablesListCommand.Execute(null);
         }
     }
 }
