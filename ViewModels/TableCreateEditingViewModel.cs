@@ -33,8 +33,8 @@ namespace WpfPracticalProject.ViewModels
             _activeTableId = selectedTable.ID;
             WindowTitle = $"Edit Table \"{_activeTableName}\"";
             var tableType = (from t in TypesList
-                where t.ID.Equals(selectedTable.TableTypeID)
-                select t).First();
+                             where t.ID.Equals(selectedTable.TableTypeID)
+                             select t).First();
             _activeTableTypeIndex = _typesList.IndexOf(tableType);
         }
 
@@ -114,7 +114,7 @@ namespace WpfPracticalProject.ViewModels
                         db.SaveChanges();
                         OnClosingRequest();
                     }
-                }));
+                }, canExecute => CanExecuteEditUpdate()));
             }
         }
 
@@ -132,15 +132,22 @@ namespace WpfPracticalProject.ViewModels
                         db.SaveChanges();
                         OnClosingRequest();
                     }
-                }));
+                }, canExecute => CanExecuteEditUpdate()));
             }
+        }
+
+        public bool CanExecuteEditUpdate()
+        {
+            return !string.IsNullOrEmpty(_activeTableName) && _activeTableType != null;
         }
 
         private List<TableType> GetTablesTypesList()
         {
-            var db = new AppDataBaseContext();
-            db.TableTypes.Load();
-            return db.TableTypes.Local.ToList();
+            using (var db = new AppDataBaseContext())
+            {
+                db.TableTypes.Load();
+                return db.TableTypes.Local.ToList();
+            }
         }
     }
 }

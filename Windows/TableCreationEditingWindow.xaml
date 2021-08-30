@@ -55,7 +55,7 @@
         <TextBox
             Grid.Row="1"
             Grid.Column="3"
-            Text="{Binding Path=ActiveTableName, Mode=TwoWay}" />
+            Text="{Binding Path=ActiveTableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <ComboBox
             x:Name="tableTypeComboBox"
             Grid.Row="3"
