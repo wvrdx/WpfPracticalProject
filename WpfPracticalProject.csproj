@@ -87,6 +87,7 @@
     </ApplicationDefinition>
     <Compile Include="AppDataBaseContext.cs" />
     <Compile Include="Common\CloseableViewModelBase.cs" />
+    <Compile Include="Common\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\ModelsBase.cs" />
     <Compile Include="Models\TableToViewModel.cs" />

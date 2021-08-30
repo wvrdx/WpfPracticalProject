@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
     mc:Ignorable="d"
     Title="{Binding WindowTitle, Mode=OneWay}"
     Height="450"
@@ -80,13 +81,13 @@
             Grid.Row="5"
             Grid.Column="3"
             Content="Create"
-            Visibility="{Binding AddButtonVisiblity}"
+            Visibility="{Binding IsAddButtonVisible, Converter={StaticResource BoolToVisibility}, Mode=OneTime}"
             Command="{Binding AddTableCommand}" />
         <Button
             Grid.Row="5"
             Grid.Column="3"
             Content="Save"
-            Visibility="{Binding SaveButtonVisiblity}"
+            Visibility="{Binding IsSaveButtonVisible, Converter={StaticResource BoolToVisibility}, Mode=OneTime}"
             Command="{Binding UpdateTableCommand}" />
     </Grid>
 </Window>

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Windows;
 using WpfPracticalProject.Common;
 using WpfPracticalProject.Models;
 
@@ -34,30 +33,20 @@ namespace WpfPracticalProject.ViewModels
             _activeTableId = selectedTable.ID;
             WindowTitle = $"Edit Table \"{_activeTableName}\"";
             var tableType = (from t in TypesList
-                             where t.ID.Equals(selectedTable.TableTypeID)
-                             select t).First();
+                where t.ID.Equals(selectedTable.TableTypeID)
+                select t).First();
             _activeTableTypeIndex = _typesList.IndexOf(tableType);
         }
 
-        public string AddButtonVisiblity
+        public bool IsAddButtonVisible
         {
-            get
-            {
-                if (_isAddButtonVisible)
-                    return "Visible";
-                return "Collapsed";
-            }
+            get => _isAddButtonVisible;
             private set { }
         }
 
-        public string SaveButtonVisiblity
+        public bool IsSaveButtonVisible
         {
-            get
-            {
-                if (_isSaveButtonVisible)
-                    return "Visible";
-                return "Collapsed";
-            }
+            get => _isSaveButtonVisible;
             private set { }
         }
 
@@ -112,20 +101,20 @@ namespace WpfPracticalProject.ViewModels
             get
             {
                 return _addTableCommand ?? (_addTableCommand = new RelayCommand(obj =>
+                {
+                    using (var db = new AppDataBaseContext())
                     {
-                        using (var db = new AppDataBaseContext())
+                        var table = new Table
                         {
-                            var table = new Table
-                            {
-                                TableName = _activeTableName,
-                                TypeID = _activeTableType.ID,
-                                StatusID = 1
-                            };
-                            db.Tables.Add(table);
-                            db.SaveChanges();
-                            OnClosingRequest();
-                        }
-                    }));
+                            TableName = _activeTableName,
+                            TypeID = _activeTableType.ID,
+                            StatusID = 1
+                        };
+                        db.Tables.Add(table);
+                        db.SaveChanges();
+                        OnClosingRequest();
+                    }
+                }));
             }
         }
 
