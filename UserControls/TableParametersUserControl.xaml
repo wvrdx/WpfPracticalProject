@@ -74,11 +74,10 @@
             Background="MediumSpringGreen"
             Content="Booking Button" />
         <!-- Image -->
-        <TextBlock
+        <Button
             Grid.Column="2"
             Grid.Row="0"
             Grid.RowSpan="4"
-            Background="LightYellow"
-            Text="Image/Video/Whatever (TBD)" />
+            Style="{StaticResource StarShapedButtonStyle}" />
     </Grid>
 </UserControl>

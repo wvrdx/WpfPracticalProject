@@ -33,8 +33,8 @@ namespace WpfPracticalProject.ViewModels
             _activeTableId = selectedTable.ID;
             WindowTitle = $"Edit Table \"{_activeTableName}\"";
             var tableType = (from t in TypesList
-                             where t.ID.Equals(selectedTable.TableTypeID)
-                             select t).First();
+                where t.ID.Equals(selectedTable.TableTypeID)
+                select t).First();
             _activeTableTypeIndex = _typesList.IndexOf(tableType);
         }
 

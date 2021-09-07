@@ -42,32 +42,34 @@ namespace WpfPracticalProject.ViewModels
 
         private List<TableToView> GetTablesList()
         {
-            var db = new AppDataBaseContext();
-            var _tableListElements = new List<TableToView>();
-            db.Tables.Load();
-            db.TableTypes.Load();
-            db.TableStatuses.Load();
-            _loadedTables = db.Tables.Local.ToList();
-            _loadedTableTypes = db.TableTypes.Local.ToList();
-            _loadedTableStatuses = db.TableStatuses.Local.ToList();
-            foreach (var iteratedTable in _loadedTables)
+            using (var db = new AppDataBaseContext())
             {
-                var tableListElementToAppend = new TableToView();
-                tableListElementToAppend.ID = iteratedTable.ID;
-                tableListElementToAppend.TableName = iteratedTable.TableName;
-                tableListElementToAppend.TableTypeID = (from type in _loadedTableTypes
-                    where type.ID.Equals(iteratedTable.TypeID)
-                    select type.ID).First();
-                tableListElementToAppend.TableType = (from type in _loadedTableTypes
-                    where type.ID.Equals(iteratedTable.TypeID)
-                    select type.TypeName).First().ToString();
-                tableListElementToAppend.TableStatus = (from status in _loadedTableStatuses
-                    where status.ID.Equals(iteratedTable.StatusID)
-                    select status.StatusName).First().ToString();
-                _tableListElements.Add(tableListElementToAppend);
-            }
+                var _tableListElements = new List<TableToView>();
+                db.Tables.Load();
+                db.TableTypes.Load();
+                db.TableStatuses.Load();
+                _loadedTables = db.Tables.Local.ToList();
+                _loadedTableTypes = db.TableTypes.Local.ToList();
+                _loadedTableStatuses = db.TableStatuses.Local.ToList();
+                foreach (var iteratedTable in _loadedTables)
+                {
+                    var tableListElementToAppend = new TableToView();
+                    tableListElementToAppend.ID = iteratedTable.ID;
+                    tableListElementToAppend.TableName = iteratedTable.TableName;
+                    tableListElementToAppend.TableTypeID = (from type in _loadedTableTypes
+                        where type.ID.Equals(iteratedTable.TypeID)
+                        select type.ID).First();
+                    tableListElementToAppend.TableType = (from type in _loadedTableTypes
+                        where type.ID.Equals(iteratedTable.TypeID)
+                        select type.TypeName).First().ToString();
+                    tableListElementToAppend.TableStatus = (from status in _loadedTableStatuses
+                        where status.ID.Equals(iteratedTable.StatusID)
+                        select status.StatusName).First().ToString();
+                    _tableListElements.Add(tableListElementToAppend);
+                }
 
-            return _tableListElements;
+                return _tableListElements;
+            }
         }
     }
 }
