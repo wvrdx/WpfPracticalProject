@@ -45,7 +45,7 @@
             SelectedItem="{Binding DataContext.SelectedTable, RelativeSource={RelativeSource AncestorType=Window}, Mode=OneWayToSource}"
             SelectionMode="Single"
             MouseDown="tablesListView_MouseDown"
-            behaviors:ListViewBehavior.HideColumns="{Binding SelectedColumnNumbers}">
+            behaviors:ListViewHelper.HideColumns="{Binding SelectedColumnNumbers}">
             <!--View="{Binding SelectedColumns, Converter={StaticResource ColumnConfigToDynamicGridViewConverter}}"-->
             <ListView.View>
                 <GridView

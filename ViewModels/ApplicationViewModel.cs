@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using WpfPracticalProject.Common;
+﻿using WpfPracticalProject.Common;
 using WpfPracticalProject.Models;
 
 namespace WpfPracticalProject
@@ -21,7 +20,6 @@ namespace WpfPracticalProject
                 }
                 else
                 {
-                    _selectedTable = value;
                     IsTableSelected = false;
                 }
 

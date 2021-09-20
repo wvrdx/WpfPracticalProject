@@ -14,7 +14,8 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid>
+    <Grid
+        DataContext="{Binding SelectedTable}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -30,7 +31,8 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Margin="2"
-            Background="LightYellow"/>
+            Background="LightYellow"
+            ItemsSource="{Binding SelectedTableBookingToView}"/>
         <Grid
             Grid.Column="1"
             Grid.Row="0">

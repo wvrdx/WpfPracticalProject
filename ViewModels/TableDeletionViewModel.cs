@@ -8,29 +8,19 @@ namespace WpfPracticalProject.ViewModels
     {
         private readonly int _activeTableID;
         private readonly string _activeTableName;
-        private readonly string _configrationMessage;
-        private readonly string _windowTitle;
         private RelayCommand _deleteTableCommand;
 
         public TableDeletionViewModel(TableToView SelectedTable)
         {
             _activeTableName = SelectedTable.TableName;
             _activeTableID = SelectedTable.Id;
-            _configrationMessage = $"Are you sure want to delete table \"{_activeTableName}\"?";
-            _windowTitle = $"Delete Table \"{_activeTableName}\"?";
+            ConfigrationMessage = $"Are you sure want to delete table \"{_activeTableName}\"?";
+            WindowTitle = $"Delete Table \"{_activeTableName}\"?";
         }
 
-        public string WindowTitle
-        {
-            get => _windowTitle;
-            private set { }
-        }
+        public string WindowTitle { get; }
 
-        public string ConfigrationMessage
-        {
-            get => _configrationMessage;
-            private set { }
-        }
+        public string ConfigrationMessage { get; }
 
         public RelayCommand DeleteTableCommand
         {

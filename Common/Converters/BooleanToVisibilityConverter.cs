@@ -9,14 +9,12 @@ namespace WpfPracticalProject.Common.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is bool && (bool) value) return Visibility.Visible;
-            return Visibility.Collapsed;
+            return value != null && (bool)value ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Visibility && (Visibility) value == Visibility.Visible) return true;
-            return false;
+            return value is Visibility visibility && visibility == Visibility.Visible;
         }
     }
 }

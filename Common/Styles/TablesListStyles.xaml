@@ -6,16 +6,10 @@
         <ResourceDictionary
             Source="/WpfPracticalProject;component/Common/Styles/GlobalStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <convs:ColumnConfigToDynamicGridViewConverter
-        x:Key="ColumnConfigToDynamicGridViewConverter" />
     <convs:ColumnToComboBoxElementConverter
         x:Key="ColumnToComboBoxElementConverter" />
     <convs:ColumnToSelectedColumnsConverter
         x:Key="ColumnToSelectedColumnsConverter" />
-    <convs:ColumnConfigToGridViewColumnConverter
-        x:Key="ColumnConfigToGridViewColumnConverter" />
-    <convs:ColumnsVisibilityToListBehaviourArgConverter
-        x:Key="ColumnsVisibilityToListBehaviourArgConverter" />
     <Style
         TargetType="TextBlock" />
     <Style

@@ -15,13 +15,10 @@ namespace WpfPracticalProject.Common.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var columnsList = value as ObservableCollection<Column>;
-            List<string> toReturn = new List<string>();
+            var toReturn = new List<string>();
             if (columnsList != null)
             {
-                foreach (var column in columnsList)
-                {
-                    toReturn.Add(column.Header);
-                }
+                toReturn.AddRange(columnsList.Select(column => column.Header));
             }
             return toReturn;
         }

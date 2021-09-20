@@ -86,14 +86,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppDataBaseContext.cs" />
-    <Compile Include="Common\Behaviors\ListViewBehavior.cs" />
+    <Compile Include="Common\Behaviors\ListViewHelper.cs" />
     <Compile Include="Common\CloseableViewModelBase.cs" />
     <Compile Include="Common\Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Common\Converters\ColumnConfigToDynamicGridViewConverter.cs" />
     <Compile Include="Common\Converters\ColumnToComboBoxElementConverter.cs" />
-    <Compile Include="Common\Converters\ColumnConfigToGridViewColumnConverter.cs" />
     <Compile Include="Common\Converters\ColumnToSelectedColumnsConverter.cs" />
-    <Compile Include="Common\Converters\ColumnsVisibilityToListBehaviourArgConverter.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\ModelsBase.cs" />
     <Compile Include="Models\BookingStatusModel.cs" />
@@ -172,8 +169,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\TablesListUserControl.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\TableCreationEditingWindow.xaml">
       <SubType>Designer</SubType>

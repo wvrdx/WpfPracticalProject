@@ -22,12 +22,28 @@ namespace WpfPracticalProject.UserControls
     /// </summary>
     public partial class BookingsListUserControl : UserControl
     {
-        BookingsListViewModel vm;
+        private BookingsListViewModel _vm;
         public BookingsListUserControl()
         {
             InitializeComponent();
-            vm = new BookingsListViewModel();
-            DataContext = vm;
+            _vm = new BookingsListViewModel();
+            DataContext = _vm;
         }
+
+        public TableToView SelectedTable
+        {
+            get => (TableToView)GetValue(SelectedTableProperty);
+            set
+            {
+                SetValue(SelectedTableProperty, value);
+                _vm.SelectedTable = value;
+            }
+        }
+
+        public static readonly DependencyProperty SelectedTableProperty =
+            DependencyProperty.Register(
+                "SelectedTable", typeof(TableToView),
+                typeof(BookingsListUserControl)
+            );
     }
 }

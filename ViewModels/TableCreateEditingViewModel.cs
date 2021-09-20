@@ -9,8 +9,6 @@ namespace WpfPracticalProject.ViewModels
     internal class TableCreateEditingViewModel : CloseableViewModelBase
     {
         private readonly int _activeTableId;
-        private readonly bool _isAddButtonVisible;
-        private readonly bool _isSaveButtonVisible;
         private string _activeTableName;
         private TableType _activeTableType;
         private int _activeTableTypeIndex;
@@ -21,34 +19,26 @@ namespace WpfPracticalProject.ViewModels
         public TableCreateEditingViewModel()
         {
             WindowTitle = "Add New Table";
-            _isSaveButtonVisible = false;
-            _isAddButtonVisible = true;
+            IsSaveButtonVisible = false;
+            IsAddButtonVisible = true;
         }
 
         public TableCreateEditingViewModel(TableToView selectedTable)
         {
-            _isAddButtonVisible = false;
-            _isSaveButtonVisible = true;
+            IsAddButtonVisible = false;
+            IsSaveButtonVisible = true;
             _activeTableName = selectedTable.TableName;
             _activeTableId = selectedTable.Id;
             WindowTitle = $"Edit Table \"{_activeTableName}\"";
             var tableType = (from t in TypesList
-                where t.Id.Equals(selectedTable.TableTypeId)
-                select t).First();
+                             where t.Id.Equals(selectedTable.TableTypeId)
+                             select t).First();
             _activeTableTypeIndex = _typesList.IndexOf(tableType);
         }
 
-        public bool IsAddButtonVisible
-        {
-            get => _isAddButtonVisible;
-            private set { }
-        }
+        public bool IsAddButtonVisible { get; }
 
-        public bool IsSaveButtonVisible
-        {
-            get => _isSaveButtonVisible;
-            private set { }
-        }
+        public bool IsSaveButtonVisible { get; }
 
         public string ActiveTableName
         {
@@ -94,7 +84,7 @@ namespace WpfPracticalProject.ViewModels
             }
         }
 
-        public string WindowTitle { get; set; }
+        public string WindowTitle { get; }
 
         public RelayCommand AddTableCommand
         {
@@ -141,7 +131,7 @@ namespace WpfPracticalProject.ViewModels
             return !string.IsNullOrEmpty(_activeTableName) && _activeTableType != null;
         }
 
-        private List<TableType> GetTablesTypesList()
+        private static List<TableType> GetTablesTypesList()
         {
             using (var db = new AppDataBaseContext())
             {
