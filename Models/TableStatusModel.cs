@@ -4,7 +4,7 @@ namespace WpfPracticalProject.Models
 {
     public class TableStatus : ModelsBase
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string StatusName { get; set; }
     }
 }

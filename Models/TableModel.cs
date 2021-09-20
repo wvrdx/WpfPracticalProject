@@ -5,11 +5,11 @@ namespace WpfPracticalProject.Models
 {
     public class Table : ModelsBase
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string TableName { get; set; }
-        public int TypeID { get; set; }
+        public int TypeId { get; set; }
         public TableType Type { get; set; }
-        public int StatusID { get; set; }
+        public int StatusId { get; set; }
         public TableStatus Status { get; set; }
         public ICollection<Booking> Bookings { get; set; }
     }

@@ -4,7 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:commonuc="clr-namespace:WpfPracticalProject.UserControls.Common"
+    xmlns:viewmodels="clr-namespace:WpfPracticalProject.ViewModels"
+    xmlns:behaviors="clr-namespace:WpfPracticalProject.Common.Behaviors"
+    xmlns:src="clr-namespace:CustomControls;assembly=MultiComboBox"
+    d:DataContext="{d:DesignInstance Type=viewmodels:TablesListViewModel}"
     mc:Ignorable="d"
     d:DesignHeight="450"
     d:DesignWidth="800">
@@ -24,10 +27,16 @@
             <RowDefinition
                 Height="30" />
         </Grid.RowDefinitions>
-        <commonuc:MultiSelectComboBox
-            Margin="2"
-            ItemsSource="{Binding Items}"
-            SelectedItems="{Binding SelectedColumns}" />
+        <src:MultiComboBox
+            SelectionMode="Multiple"
+            VerticalAlignment="Center"
+            IsCreateNewEnabled="False"
+            DisplaySeparator=", "
+            ItemsSource="{Binding AvailableListedColumns, Converter={StaticResource ColumnToComboBoxElementConverter}}"
+            SelectedItems="{Binding SelectedColumns, Converter={StaticResource ColumnToSelectedColumnsConverter}, Mode=OneTime}"
+            SelectionChanged="Selector_OnSelectionChanged">
+
+        </src:MultiComboBox>
         <ListView
             Name="tablesListView"
             Grid.Row="1"
@@ -35,24 +44,12 @@
             ItemsSource="{Binding TablesListToView, Mode=OneWay}"
             SelectedItem="{Binding DataContext.SelectedTable, RelativeSource={RelativeSource AncestorType=Window}, Mode=OneWayToSource}"
             SelectionMode="Single"
-            MouseDown="tablesListView_MouseDown">
+            MouseDown="tablesListView_MouseDown"
+            behaviors:ListViewBehavior.HideColumns="{Binding SelectedColumnNumbers}">
+            <!--View="{Binding SelectedColumns, Converter={StaticResource ColumnConfigToDynamicGridViewConverter}}"-->
             <ListView.View>
                 <GridView
-                    x:Name="tablesListGridView"
-                    AllowsColumnReorder="true"
-                    ColumnHeaderToolTip="Table Information">
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding TableName, Mode=OneWay}"
-                        Width="120"
-                        Header="Table Name" />
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding TableType, Mode=OneWay}"
-                        Width="120"
-                        Header="Table Type" />
-                    <GridViewColumn
-                        DisplayMemberBinding="{Binding TableStatus, Mode=OneWay}"
-                        Width="120"
-                        Header="Status" />
+                    x:Name="gridView1">
                 </GridView>
             </ListView.View>
         </ListView>

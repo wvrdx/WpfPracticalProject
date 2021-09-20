@@ -30,10 +30,10 @@ namespace WpfPracticalProject.ViewModels
             _isAddButtonVisible = false;
             _isSaveButtonVisible = true;
             _activeTableName = selectedTable.TableName;
-            _activeTableId = selectedTable.ID;
+            _activeTableId = selectedTable.Id;
             WindowTitle = $"Edit Table \"{_activeTableName}\"";
             var tableType = (from t in TypesList
-                where t.ID.Equals(selectedTable.TableTypeID)
+                where t.Id.Equals(selectedTable.TableTypeId)
                 select t).First();
             _activeTableTypeIndex = _typesList.IndexOf(tableType);
         }
@@ -107,8 +107,8 @@ namespace WpfPracticalProject.ViewModels
                         var table = new Table
                         {
                             TableName = _activeTableName,
-                            TypeID = _activeTableType.ID,
-                            StatusID = 1
+                            TypeId = _activeTableType.Id,
+                            StatusId = 1
                         };
                         db.Tables.Add(table);
                         db.SaveChanges();
@@ -126,9 +126,9 @@ namespace WpfPracticalProject.ViewModels
                 {
                     using (var db = new AppDataBaseContext())
                     {
-                        var table = db.Tables.SingleOrDefault(t => t.ID == _activeTableId);
+                        var table = db.Tables.SingleOrDefault(t => t.Id == _activeTableId);
                         table.TableName = _activeTableName;
-                        table.TypeID = _activeTableType.ID;
+                        table.TypeId = _activeTableType.Id;
                         db.SaveChanges();
                         OnClosingRequest();
                     }

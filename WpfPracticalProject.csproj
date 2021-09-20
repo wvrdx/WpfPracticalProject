@@ -86,15 +86,23 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppDataBaseContext.cs" />
+    <Compile Include="Common\Behaviors\ListViewBehavior.cs" />
     <Compile Include="Common\CloseableViewModelBase.cs" />
     <Compile Include="Common\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Common\Converters\ColumnConfigToDynamicGridViewConverter.cs" />
+    <Compile Include="Common\Converters\ColumnToComboBoxElementConverter.cs" />
+    <Compile Include="Common\Converters\ColumnConfigToGridViewColumnConverter.cs" />
+    <Compile Include="Common\Converters\ColumnToSelectedColumnsConverter.cs" />
+    <Compile Include="Common\Converters\ColumnsVisibilityToListBehaviourArgConverter.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\ModelsBase.cs" />
+    <Compile Include="Models\BookingStatusModel.cs" />
+    <Compile Include="Models\BookingToViewModel.cs" />
     <Compile Include="Models\TableToViewModel.cs" />
     <Compile Include="Models\TableStatusModel.cs" />
     <Compile Include="Models\TableTypeModel.cs" />
-    <Compile Include="UserControls\Common\MultiSelectComboBox.xaml.cs">
-      <DependentUpon>MultiSelectComboBox.xaml</DependentUpon>
+    <Compile Include="UserControls\BookingsListUserControl.xaml.cs">
+      <DependentUpon>BookingsListUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\TableParametersUserControl.xaml.cs">
       <DependentUpon>TableParametersUserControl.xaml</DependentUpon>
@@ -104,7 +112,6 @@
     </Compile>
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModels\BookingsListViewModel.cs" />
-    <Compile Include="ViewModels\Common\MultiSelectionComboBoxViewModel.cs" />
     <Compile Include="ViewModels\TableCreateEditingViewModel.cs" />
     <Compile Include="ViewModels\TableDeletionViewModel.cs" />
     <Compile Include="ViewModels\TableParametersViewModel.cs" />
@@ -116,6 +123,10 @@
     <Compile Include="Windows\TableDeletionWindow.xaml.cs">
       <DependentUpon>TableDeletionWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Common\Styles\BookingsListStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Common\Styles\CreateEditWindowStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -152,7 +163,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\Common\MultiSelectComboBox.xaml">
+    <Page Include="UserControls\BookingsListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,7 +214,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="MultiSelectComboBox\MultiComboBox.csproj">
+      <Project>{6e683ffd-0f53-4225-b34c-88ef47f7d062}</Project>
+      <Name>MultiComboBox</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

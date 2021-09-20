@@ -4,7 +4,7 @@ namespace WpfPracticalProject.Models
 {
     public class TableType : ModelsBase
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string TypeName { get; set; }
         public int Rate { get; set; }
     }

@@ -7,7 +7,6 @@ namespace WpfPracticalProject
     internal class ApplicationViewModel : ViewModelBase
     {
         private bool _isTableSelected;
-        private Dictionary<string, object> _selectedColumns;
         private TableToView _selectedTable;
 
         public TableToView SelectedTable
@@ -37,16 +36,6 @@ namespace WpfPracticalProject
             {
                 _isTableSelected = value;
                 NotifyPropertyChanged("IsTableSelected");
-            }
-        }
-
-        public Dictionary<string, object> SelectedColumns
-        {
-            get => _selectedColumns;
-            set
-            {
-                _selectedColumns = value;
-                NotifyPropertyChanged("SelectedColumns");
             }
         }
     }

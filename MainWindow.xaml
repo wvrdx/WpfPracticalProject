@@ -47,117 +47,12 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2" />
             <!-- Booking List -->
-            <ListBox
+            <uc:BookingsListUserControl
                 Grid.Column="0"
                 Grid.Row="1"
-                Grid.RowSpan="2"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Margin="2"
-                Background="LightYellow" />
-            <Grid
-                Grid.Column="1"
-                Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition
-                        Height="30" />
-                </Grid.RowDefinitions>
-                <!-- Booked by -->
-                <TextBlock
-                    Grid.Row="0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Margin="2"
-                    Background="AntiqueWhite"
-                    Text="Booked by (NAME/PHONE)" />
-                <!-- Booked from -->
-                <TextBlock
-                    Grid.Row="1"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Margin="2"
-                    Background="AntiqueWhite"
-                    Text="Booked from (DATE)" />
-                <!-- Booked for -->
-                <TextBlock
-                    Grid.Row="2"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Margin="2"
-                    Background="AntiqueWhite"
-                    Text="Booked for (TIME)" />
-                <!-- Panel -->
-                <Grid
-                    Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition
-                            Width="30" />
-                        <ColumnDefinition
-                            Width="30" />
-                    </Grid.ColumnDefinitions>
-                    <!-- Edit Booking Button -->
-                    <Button
-                        Grid.Column="1"
-                        Content="E"
-                        Margin="2" />
-                    <!-- Delete Booking Button -->
-                    <Button
-                        Grid.Column="2"
-                        Content="D"
-                        Margin="2" />
-                </Grid>
-            </Grid>
-            <Grid
-                Grid.Column="1"
-                Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition
-                        Height="30" />
-                </Grid.RowDefinitions>
-                <!-- Client Name -->
-                <TextBlock
-                    Grid.Row="0"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Margin="2"
-                    Background="AntiqueWhite"
-                    Text="Client Name" />
-                <!-- Client Phone -->
-                <TextBlock
-                    Grid.Row="1"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Stretch"
-                    Margin="2"
-                    Background="AntiqueWhite"
-                    Text="Client Phone" />
-                <!-- Panel -->
-                <Grid
-                    Grid.Row="2">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition
-                            Width="30" />
-                        <ColumnDefinition
-                            Width="30" />
-                    </Grid.ColumnDefinitions>
-                    <!-- Edit Client Button -->
-                    <Button
-                        Grid.Column="1"
-                        Content="E"
-                        Margin="2" />
-                    <!-- Delete Client Button -->
-                    <Button
-                        Grid.Column="2"
-                        Content="D"
-                        Margin="2" />
-                </Grid>
-            </Grid>
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="2">
+            </uc:BookingsListUserControl>
         </Grid>
     </Grid>
 </Window>

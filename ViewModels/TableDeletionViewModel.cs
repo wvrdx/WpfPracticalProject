@@ -15,7 +15,7 @@ namespace WpfPracticalProject.ViewModels
         public TableDeletionViewModel(TableToView SelectedTable)
         {
             _activeTableName = SelectedTable.TableName;
-            _activeTableID = SelectedTable.ID;
+            _activeTableID = SelectedTable.Id;
             _configrationMessage = $"Are you sure want to delete table \"{_activeTableName}\"?";
             _windowTitle = $"Delete Table \"{_activeTableName}\"?";
         }
@@ -42,7 +42,7 @@ namespace WpfPracticalProject.ViewModels
                     {
                         var table = new Table
                         {
-                            ID = _activeTableID
+                            Id = _activeTableID
                         };
                         db.Entry(table).State = EntityState.Deleted;
                         db.SaveChanges();

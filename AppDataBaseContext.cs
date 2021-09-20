@@ -14,5 +14,6 @@ namespace WpfPracticalProject
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<TableStatus> TableStatuses { get; set; }
         public DbSet<TableType> TableTypes { get; set; }
+        public DbSet<BookingStatus> BookingStatuses { get; set; }
     }
 }

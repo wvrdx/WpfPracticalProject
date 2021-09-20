@@ -1,7 +1,15 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using CustomControls;
+using WpfPracticalProject.Common.Converters;
 using WpfPracticalProject.Models;
 using WpfPracticalProject.ViewModels;
 using WpfPracticalProject.Windows;
@@ -13,24 +21,39 @@ namespace WpfPracticalProject.UserControls
     /// </summary>
     public partial class TablesListUserControl : UserControl
     {
-        private readonly TablesListViewModel vm;
+        private readonly TablesListViewModel _vm;
+        private ObservableCollection<Column> _currentColumnsList;
 
         public TablesListUserControl()
         {
             InitializeComponent();
-            vm = new TablesListViewModel();
-            DataContext = vm;
+            _vm = new TablesListViewModel();
+            _currentColumnsList = _vm.AvailableListedColumns;
+            if (_currentColumnsList != null)
+            {
+                foreach (var column in _currentColumnsList)
+                {
+                    GridViewColumn gc = new GridViewColumn
+                    {
+                        Header = column.Header,
+                        DisplayMemberBinding = new Binding(column.DataField),
+                        Width = column.Width
+                    };
+                    gridView1.Columns.Add(gc);
+                }
+            }
+            DataContext = _vm;
         }
 
         private void Edit_Button_Click(object sender, RoutedEventArgs e)
         {
-            var SelectedTable = (TableToView) tablesListView.SelectedItem;
+            var SelectedTable = (TableToView)tablesListView.SelectedItem;
             var SelectedTableIndex = tablesListView.SelectedIndex;
             var m = new TableCreationEditingWindow(SelectedTable);
             m.ShowDialog();
             if (m.DialogResult.HasValue && m.DialogResult.Value)
             {
-                vm.RefreshTablesListCommand.Execute(null);
+                _vm.RefreshTablesListCommand.Execute(null);
                 tablesListView.SelectedIndex = SelectedTableIndex;
             }
         }
@@ -41,7 +64,7 @@ namespace WpfPracticalProject.UserControls
             m.ShowDialog();
             if (m.DialogResult.HasValue && m.DialogResult.Value)
             {
-                vm.RefreshTablesListCommand.Execute(null);
+                _vm.RefreshTablesListCommand.Execute(null);
                 tablesListView.SelectedIndex = tablesListView.Items.Count - 1;
             }
         }
@@ -55,11 +78,17 @@ namespace WpfPracticalProject.UserControls
 
         private void Delete_Button_Click(object sender, RoutedEventArgs e)
         {
-            var SelectedTable = (TableToView) tablesListView.SelectedItem;
+            var SelectedTable = (TableToView)tablesListView.SelectedItem;
             var m = new TableDeletionWindow(SelectedTable);
             m.ShowDialog();
             if (m.DialogResult.HasValue && m.DialogResult.Value)
-                vm.RefreshTablesListCommand.Execute(null);
+                _vm.RefreshTablesListCommand.Execute(null);
+        }
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedItems = ((ListBox)sender).SelectedItems.Cast<String>();
+            if(selectedItems != null) _vm.SetColumnVisibility(selectedItems);
         }
     }
 }
