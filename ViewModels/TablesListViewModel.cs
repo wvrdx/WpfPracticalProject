@@ -14,7 +14,7 @@ namespace WpfPracticalProject.ViewModels
 {
     public class TablesListViewModel : ViewModelBase
     {
-        private static Dictionary<string, Color> statusColorsMap = new Dictionary<string, Color>
+        private static Dictionary<string, Color> _statusColorsMap = new Dictionary<string, Color>
         {
             { "DefaultStatus", Color.FromArgb(50,255,0,0) },
             { "Status1", Color.FromArgb(50,0,255,0) },
@@ -25,7 +25,7 @@ namespace WpfPracticalProject.ViewModels
             new Column {Order = 0, Header = "Table Name", DataField = "TableName", Visibility = true, CellTemplate = GridCellDataTemplates.TableNameCellDataTemplate("TableName")},
             new Column {Order = 1, Header = "Table Type", DataField = "TableType", Visibility = true, CellTemplate = GridCellDataTemplates.TableTypeCellDataTemplate(DatabaseHelpers.GetTablesTypesList(), "TableType")},
             new Column {Order = 2, Header = "Table Rate", DataField = "TableRate", Visibility = true, Width = 80},
-            new Column {Order = 3, Header = "Status", DataField = "TableStatus", Visibility = true, Width = 90, CellTemplate = GridCellDataTemplates.TableStatusCellDataTemplate(statusColorsMap, "TableStatus")}
+            new Column {Order = 3, Header = "Status", DataField = "TableStatus", Visibility = true, Width = 90, CellTemplate = GridCellDataTemplates.TableStatusCellDataTemplate(_statusColorsMap, "TableStatus")}
         };
 
         private StringBuilder _columnNumbers;

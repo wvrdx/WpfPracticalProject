@@ -32,7 +32,12 @@ namespace WpfPracticalProject.Common.Templates
         {
             var dataTemplateToReturn = new DataTemplate();
             var textBoxFactory = new FrameworkElementFactory(typeof(TextBox));
-            textBoxFactory.SetBinding(TextBox.TextProperty, new Binding(bindedProperty));
+            textBoxFactory.SetBinding(TextBox.TextProperty, new Binding
+            {
+                Path = new PropertyPath(bindedProperty),
+                Mode = BindingMode.TwoWay,
+                UpdateSourceTrigger = UpdateSourceTrigger.LostFocus
+            });
             dataTemplateToReturn.VisualTree = textBoxFactory;
             return dataTemplateToReturn;
         }
@@ -57,7 +62,6 @@ namespace WpfPracticalProject.Common.Templates
                 statusColorTrigger.Setters.Add(statusBackgroundColorSetter);
                 textBlockStyle.Triggers.Add(statusColorTrigger);
             }
-
             textBlockFactory.SetValue(FrameworkElement.StyleProperty, textBlockStyle);
             textBlockFactory.SetBinding(TextBlock.TextProperty, new Binding(bindedProperty));
             dataTemplateToReturn.VisualTree = textBlockFactory;

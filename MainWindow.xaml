@@ -22,7 +22,7 @@
         </Grid.ColumnDefinitions>
         <!-- Tables List -->
         <uc:TablesListUserControl
-            Grid.Column="0" />
+            Grid.Column="0"/>
         <GridSplitter
             Grid.Column="1"
             ShowsPreview="False"

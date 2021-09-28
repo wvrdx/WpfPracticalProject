@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using WpfPracticalProject.Common.Converters;
 using WpfPracticalProject.Models;
 using WpfPracticalProject.ViewModels;
 using WpfPracticalProject.Windows;
@@ -38,7 +40,6 @@ namespace WpfPracticalProject.UserControls
                         gc.CellTemplate = column.CellTemplate;
                     gridView1.Columns.Add(gc);
                 }
-
             DataContext = _vm;
         }
 

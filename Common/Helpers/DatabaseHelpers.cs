@@ -52,13 +52,13 @@ namespace WpfPracticalProject.Common.Helpers
             }
         }
 
-        public static void UpdateTable(int tableId, int tableTypeId, string tableName)
+        public static void UpdateTable(TableToView tableToUpdate)
         {
             using (var db = new AppDataBaseContext())
             {
-                var table = db.Tables.SingleOrDefault(t => t.Id == tableId);
-                table.TableName = tableName;
-                table.TypeId = tableTypeId;
+                var tableFromDB = db.Tables.SingleOrDefault(t => t.Id == tableToUpdate.Id);
+                tableFromDB.TypeId = tableToUpdate.TableTypeId;
+                tableFromDB.TableName = tableToUpdate.TableName;
                 db.SaveChanges();
             }
         }
