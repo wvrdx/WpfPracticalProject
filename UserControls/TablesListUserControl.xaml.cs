@@ -30,9 +30,12 @@ namespace WpfPracticalProject.UserControls
                     var gc = new GridViewColumn
                     {
                         Header = column.Header,
-                        DisplayMemberBinding = new Binding(column.DataField),
                         Width = column.Width
                     };
+                    if (column.CellTemplate == null)
+                        gc.DisplayMemberBinding = new Binding(column.DataField);
+                    else 
+                        gc.CellTemplate = column.CellTemplate;
                     gridView1.Columns.Add(gc);
                 }
 

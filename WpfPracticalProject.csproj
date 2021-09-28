@@ -86,13 +86,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppDataBaseContext.cs" />
-    <Compile Include="Common\Behaviors\ListViewHelper.cs" />
+    <Compile Include="Common\Helpers\ColorHelpers.cs" />
+    <Compile Include="Common\Helpers\DatabaseHelpers.cs" />
+    <Compile Include="Common\Helpers\ListViewHelper.cs" />
     <Compile Include="Common\CloseableViewModelBase.cs" />
     <Compile Include="Common\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Common\Converters\ColumnToComboBoxElementConverter.cs" />
     <Compile Include="Common\Converters\ColumnToSelectedColumnsConverter.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\ModelsBase.cs" />
+    <Compile Include="Common\Templates\GridCellDataTemplates.cs" />
     <Compile Include="Models\BookingStatusModel.cs" />
     <Compile Include="Models\BookingToViewModel.cs" />
     <Compile Include="Models\TableToViewModel.cs" />
@@ -217,6 +220,7 @@
       <Name>MultiComboBox</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

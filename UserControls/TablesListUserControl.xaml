@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:viewmodels="clr-namespace:WpfPracticalProject.ViewModels"
-    xmlns:behaviors="clr-namespace:WpfPracticalProject.Common.Behaviors"
+    xmlns:helpers="clr-namespace:WpfPracticalProject.Common.Helpers"
     xmlns:src="clr-namespace:CustomControls;assembly=MultiComboBox"
     d:DataContext="{d:DesignInstance Type=viewmodels:TablesListViewModel}"
     mc:Ignorable="d"
@@ -45,13 +45,24 @@
             SelectedItem="{Binding DataContext.SelectedTable, RelativeSource={RelativeSource AncestorType=Window}, Mode=OneWayToSource}"
             SelectionMode="Single"
             MouseDown="tablesListView_MouseDown"
-            behaviors:ListViewHelper.HideColumns="{Binding SelectedColumnNumbers}">
+            helpers:ListViewHelper.HideColumns="{Binding SelectedColumnNumbers}">
             <!--View="{Binding SelectedColumns, Converter={StaticResource ColumnConfigToDynamicGridViewConverter}}"-->
             <ListView.View>
                 <GridView
                     x:Name="gridView1">
                 </GridView>
             </ListView.View>
+            <ListView.Resources>
+                <Style
+                    TargetType="ListViewItem">
+                    <Setter
+                        Property="HorizontalContentAlignment"
+                        Value="Stretch"/>
+                    <Setter
+                        Property="VerticalContentAlignment"
+                        Value="Stretch" />
+                </Style>
+            </ListView.Resources>
         </ListView>
         <!-- Panel -->
         <Grid

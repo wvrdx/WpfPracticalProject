@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WpfPracticalProject.Common.Behaviors
+namespace WpfPracticalProject.Common.Helpers
 {
     public static class ListViewHelper
     {
