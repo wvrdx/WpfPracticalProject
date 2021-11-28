@@ -29,5 +29,10 @@ namespace WpfPracticalProject.Windows
         {
             DialogResult = false;
         }
+
+        private void Window_MouseDown(object sender, RoutedEventArgs e)
+        {
+            grid1.Focus();
+        }
     }
 }

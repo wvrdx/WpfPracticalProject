@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Text;
 using WpfPracticalProject.Common;
 using WpfPracticalProject.Models;
 
@@ -10,6 +11,8 @@ namespace WpfPracticalProject.ViewModels
     {
         private readonly int _activeTableId;
         private string _activeTableName;
+        private string _validationMessage;
+        private bool _isNameValid;
         private TableType _activeTableType;
         private int _activeTableTypeIndex;
         private RelayCommand _addTableCommand;
@@ -21,12 +24,14 @@ namespace WpfPracticalProject.ViewModels
             WindowTitle = "Add New Table";
             IsSaveButtonVisible = false;
             IsAddButtonVisible = true;
+            IsNameValid = true;
         }
 
         public TableCreateEditingViewModel(TableToView selectedTable)
         {
             IsAddButtonVisible = false;
             IsSaveButtonVisible = true;
+            IsNameValid = true;
             _activeTableName = selectedTable.TableName;
             _activeTableId = selectedTable.Id;
             WindowTitle = $"Edit Table \"{_activeTableName}\"";
@@ -39,6 +44,15 @@ namespace WpfPracticalProject.ViewModels
         public bool IsAddButtonVisible { get; }
 
         public bool IsSaveButtonVisible { get; }
+        public bool IsNameValid
+        {
+            get => _isNameValid;
+            set
+            {
+                _isNameValid = value;
+                NotifyPropertyChanged("IsNameValid");
+            }
+        }
 
         public string ActiveTableName
         {
@@ -47,6 +61,16 @@ namespace WpfPracticalProject.ViewModels
             {
                 _activeTableName = value;
                 NotifyPropertyChanged("ActiveTableName");
+            }
+        }
+
+        public string ValidationMessage
+        {
+            get => _validationMessage;
+            set
+            {
+                _validationMessage = value;
+                NotifyPropertyChanged("ValidationMessage");
             }
         }
 
@@ -128,7 +152,27 @@ namespace WpfPracticalProject.ViewModels
 
         public bool CanExecuteEditUpdate()
         {
-            return !string.IsNullOrEmpty(_activeTableName) && _activeTableType != null;
+            SetValidationResults();
+            return !string.IsNullOrEmpty(_activeTableName) && _activeTableType != null && _activeTableName.Length <= 10;
+        }
+
+        private void SetValidationResults()
+        {
+            if (string.IsNullOrEmpty(_activeTableName))
+            {
+                ValidationMessage = "Table Name cannot be empty";
+                IsNameValid = false;
+            }
+            else if (_activeTableName.Length > 10)
+            {
+                ValidationMessage = "Table Name cannot be longer than 10 characters";
+                IsNameValid = false;
+            }
+            else
+            {
+                ValidationMessage = null;
+                IsNameValid = true;
+            }
         }
 
         private static List<TableType> GetTablesTypesList()

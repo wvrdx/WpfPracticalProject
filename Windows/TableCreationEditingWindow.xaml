@@ -5,13 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-
     mc:Ignorable="d"
     Title="{Binding WindowTitle, Mode=OneWay}"
     Height="450"
     Width="800"
     ResizeMode="NoResize"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    MouseDown="Window_MouseDown">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,7 +20,9 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid
+        Name="grid1"
+        Focusable="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition
                 Width="50" />
@@ -56,6 +58,11 @@
             Grid.Row="1"
             Grid.Column="3"
             Text="{Binding Path=ActiveTableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="3"
+            Style="{StaticResource ValidationMessageStyle}"
+            Text="{Binding ValidationMessage, Mode=OneWay}" />
         <ComboBox
             x:Name="tableTypeComboBox"
             Grid.Row="3"
@@ -82,12 +89,12 @@
             Grid.Column="3"
             Content="Create"
             Visibility="{Binding IsAddButtonVisible, Converter={StaticResource BoolToVisibility}, Mode=OneTime}"
-            Command="{Binding AddTableCommand}" />
+            Command="{Binding AddTableCommand}"/>
         <Button
             Grid.Row="5"
             Grid.Column="3"
             Content="Save"
             Visibility="{Binding IsSaveButtonVisible, Converter={StaticResource BoolToVisibility}, Mode=OneTime}"
-            Command="{Binding UpdateTableCommand}" />
+            Command="{Binding UpdateTableCommand}"/>
     </Grid>
 </Window>

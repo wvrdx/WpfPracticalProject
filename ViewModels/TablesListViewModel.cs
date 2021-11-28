@@ -22,24 +22,23 @@ namespace WpfPracticalProject.ViewModels
         };
         private ObservableCollection<Column> _availableColumns = new ObservableCollection<Column>
         {
-            new Column {Order = 0, Header = "Table Name", DataField = "TableName", Visibility = true, CellTemplate = GridCellDataTemplates.TableNameCellDataTemplate("TableName")},
-            new Column {Order = 1, Header = "Table Type", DataField = "TableType", Visibility = true, CellTemplate = GridCellDataTemplates.TableTypeCellDataTemplate(DatabaseHelpers.GetTablesTypesList(), "TableType")},
-            new Column {Order = 2, Header = "Table Rate", DataField = "TableRate", Visibility = true, Width = 80},
-            new Column {Order = 3, Header = "Status", DataField = "TableStatus", Visibility = true, Width = 90, CellTemplate = GridCellDataTemplates.TableStatusCellDataTemplate(_statusColorsMap, "TableStatus")}
+            new Column {Type = "TextBox", Header = "Table Name", DataField = "TableName", Visibility = Visibility.Visible, IsReadOnly = false},
+            new Column {Type = "ComboBox", Header = "Table Type", DataField = "TableType", Visibility = Visibility.Visible, IsReadOnly = false, StyleKey = "TableTypeStyle"},
+            new Column {Type = "TextBox", Header = "Table Rate", DataField = "TableRate", Visibility = Visibility.Visible, IsReadOnly = true, Width = 80},
+            new Column {Type = "TextBox", Header = "Status", DataField = "TableStatus", Visibility = Visibility.Visible, IsReadOnly = true, StyleKey = "TableStatusStyle" , Width = 90}
         };
 
-        private StringBuilder _columnNumbers;
         private RelayCommand _refreshTablesListCommand;
         private ObservableCollection<TableToView> _tablesListToView;
+        private List<TableType> _tableTypesList;
 
         public TablesListViewModel()
         {
             _tablesListToView = DatabaseHelpers.GetTablesList();
-            _columnNumbers = new StringBuilder(CalculateColumnNumbers());
+            _tableTypesList = DatabaseHelpers.GetTablesTypesList();
         }
 
-        public string SelectedColumnNumbers => _columnNumbers.ToString();
-
+        public List<string> TableTypesNamesList => (from type in _tableTypesList select type.TypeName).ToList();
         public ObservableCollection<Column> AvailableListedColumns => _availableColumns;
 
         public ObservableCollection<Column> SelectedColumns
@@ -73,41 +72,37 @@ namespace WpfPracticalProject.ViewModels
             }
         }
 
-        private string CalculateColumnNumbers()
-        {
-            _columnNumbers = new StringBuilder();
-            foreach (var column in _availableColumns)
-            {
-                if (column.Visibility) continue;
-                _columnNumbers.Append(_availableColumns.IndexOf(column));
-                _columnNumbers.Append(",");
-            }
-
-            return _columnNumbers.ToString().TrimEnd(',');
-        }
-
         public void SetColumnVisibility(IEnumerable<string> selectedItems)
         {
             foreach (var column in _availableColumns)
             {
                 var selectedItemsEnumerable = selectedItems as string[] ?? selectedItems.ToArray();
                 if (selectedItemsEnumerable.Contains(column.Header))
-                    column.Visibility = true;
-                else if (!selectedItemsEnumerable.Contains(column.Header)) column.Visibility = false;
+                    column.Visibility = Visibility.Visible;
+                else if (!selectedItemsEnumerable.Contains(column.Header)) column.Visibility = Visibility.Hidden;
             }
-
-            _columnNumbers = new StringBuilder(CalculateColumnNumbers());
             NotifyPropertyChanged("SelectedColumnNumbers");
         }
     }
 
-    public class Column
+    public class Column : ModelsBase
     {
+        private Visibility _visibility;
         public DataTemplate CellTemplate { get; set; }
         public int Width = 100;
-        public int Order { get; set; }
         public string Header { get; set; }
+        public string StyleKey { get; set; }
         public string DataField { get; set; }
-        public bool Visibility { get; set; }
+        public Visibility Visibility
+        {
+            get => _visibility;
+            set
+            {
+                _visibility = value;
+                NotifyPropertyChanged("Visibility");
+            }
+        }
+        public string Type { get; set; }
+        public bool IsReadOnly { get; set; }
     }
 }

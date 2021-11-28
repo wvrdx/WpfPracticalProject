@@ -41,6 +41,7 @@ namespace WpfPracticalProject.Models
                     UpdateTableType(value);
                 }
                 _tableType = value;
+                NotifyPropertyChanged("TableType");
             }
         }
         public string TableRate

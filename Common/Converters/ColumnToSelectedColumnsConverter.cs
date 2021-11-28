@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using WpfPracticalProject.ViewModels;
 
@@ -18,7 +19,7 @@ namespace WpfPracticalProject.Common.Converters
             var columnsList = value as ObservableCollection<Column>;
             _allColumns = new ObservableCollection<Column>(columnsList);
             var toReturn = new List<string>();
-            toReturn.AddRange(from column in columnsList where column.Visibility select column.Header);
+            toReturn.AddRange(from column in columnsList where column.Visibility.Equals(Visibility.Visible) select column.Header);
             return toReturn;
         }
 
@@ -28,9 +29,9 @@ namespace WpfPracticalProject.Common.Converters
             foreach (var column in _allColumns)
             {
                 if (columnsDict != null && columnsDict.Contains(column.Header))
-                    _allColumns[_allColumns.IndexOf(column)].Visibility = true;
+                    _allColumns[_allColumns.IndexOf(column)].Visibility = Visibility.Visible;
                 else
-                    _allColumns[_allColumns.IndexOf(column)].Visibility = false;
+                    _allColumns[_allColumns.IndexOf(column)].Visibility = Visibility.Hidden;
             }
             return _allColumns;
         }

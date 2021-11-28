@@ -7,6 +7,12 @@
     </ResourceDictionary.MergedDictionaries>
     <convs:BooleanToVisibilityConverter
         x:Key="BoolToVisibility" />
+    <SolidColorBrush
+        x:Key="RedBorderBrush"
+        Color="Red" />
+    <SolidColorBrush
+        x:Key="DefaultBorderBrush"
+        Color="#FFABADB3" />
     <Style
         x:Key="comboBoxItem"
         TargetType="TextBlock">
@@ -25,6 +31,28 @@
         <Setter
             Property="Margin"
             Value="5" />
+        <Style.Triggers>
+            <DataTrigger
+                Binding="{Binding IsNameValid}"
+                Value="False">
+                <Setter
+                    Property="BorderThickness"
+                    Value="2" />
+                <Setter
+                    Property="BorderBrush"
+                    Value="{StaticResource RedBorderBrush}" />
+            </DataTrigger>
+            <DataTrigger
+                Binding="{Binding IsNameValid}"
+                Value="True">
+                <Setter
+                    Property="BorderThickness"
+                    Value="1" />
+                <Setter
+                    Property="BorderBrush"
+                    Value="{StaticResource DefaultBorderBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
     <Style
         TargetType="Button">
@@ -37,6 +65,19 @@
         <Setter
             Property="FontSize"
             Value="50" />
+        <Setter
+            Property="Margin"
+            Value="5" />
+    </Style>
+    <Style
+        x:Key="ValidationMessageStyle"
+        TargetType="TextBlock">
+        <Setter
+            Property="Foreground"
+            Value="Red" />
+        <Setter
+            Property="FontSize"
+            Value="12" />
         <Setter
             Property="Margin"
             Value="5" />

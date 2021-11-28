@@ -24,4 +24,58 @@
             Property="Margin"
             Value="2" />
     </Style>
+    <Style
+        x:Key="TableTypeStyle"
+        TargetType="DataGridCell">
+        <Style.Triggers>
+            <DataTrigger
+                Binding="{Binding TableType}"
+                Value="Type1">
+                <Setter
+                    Property="Background"
+                    Value="#88888800" />
+            </DataTrigger>
+            <DataTrigger
+                Binding="{Binding TableType}"
+                Value="Type2">
+                <Setter
+                    Property="Background"
+                    Value="#88008888" />
+            </DataTrigger>
+            <DataTrigger
+                Binding="{Binding TableType}"
+                Value="Type3">
+                <Setter
+                    Property="Background"
+                    Value="#88880088" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style
+        x:Key="TableStatusStyle"
+        TargetType="DataGridCell">
+        <Style.Triggers>
+            <DataTrigger
+                Binding="{Binding TableStatus}"
+                Value="DefaultStatus">
+                <Setter
+                    Property="Background"
+                    Value="#88880000" />
+            </DataTrigger>
+            <DataTrigger
+                Binding="{Binding TableStatus}"
+                Value="Status1">
+                <Setter
+                    Property="Background"
+                    Value="#88008800" />
+            </DataTrigger>
+            <DataTrigger
+                Binding="{Binding TableStatus}"
+                Value="Status2">
+                <Setter
+                    Property="Background"
+                    Value="#88000088" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>
