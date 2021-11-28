@@ -1,5 +1,4 @@
-﻿using System.Windows.Media;
-using WpfPracticalProject.Common;
+﻿using WpfPracticalProject.Common;
 
 namespace WpfPracticalProject.ViewModels
 {

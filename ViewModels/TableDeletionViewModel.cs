@@ -14,7 +14,7 @@ namespace WpfPracticalProject.ViewModels
         {
             _activeTableName = SelectedTable.TableName;
             _activeTableID = SelectedTable.Id;
-            ConfigrationMessage = $"Are you sure want to delete table \"{_activeTableName}\"?";
+            ConfigrationMessage = $"Ви точно хочете видалити стіл \"{_activeTableName}\"?";
             WindowTitle = $"Delete Table \"{_activeTableName}\"?";
         }
 

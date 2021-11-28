@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resx="clr-namespace:WpfPracticalProject.Common.Resources"
     mc:Ignorable="d"
     Title="{Binding WindowTitle, Mode=OneWay}"
     Height="450"
@@ -49,11 +50,11 @@
         <TextBlock
             Grid.Row="1"
             Grid.Column="1"
-            Text="Table Name :" />
+            Text="{x:Static resx:Resources.TableCreateEditWindow_TableName_Label}" />
         <TextBlock
             Grid.Row="3"
             Grid.Column="1"
-            Text="Table Type :" />
+            Text="{x:Static resx:Resources.TableCreateEditWindow_TableType_Label}" />
         <TextBox
             Grid.Row="1"
             Grid.Column="3"
@@ -82,19 +83,19 @@
             x:Name="cancelButton"
             Grid.Row="5"
             Grid.Column="1"
-            Content="Cancel"
+            Content="{x:Static resx:Resources.TableCreateEditWindow_CancelButton_Label}"
             Click="cancelButton_Click" />
         <Button
             Grid.Row="5"
             Grid.Column="3"
-            Content="Create"
-            Visibility="{Binding IsAddButtonVisible, Converter={StaticResource BoolToVisibility}, Mode=OneTime}"
-            Command="{Binding AddTableCommand}"/>
+            Content="{x:Static resx:Resources.TableCreateEditWindow_CreateButton_Label}"
+            Visibility="{Binding IsAddButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneTime}"
+            Command="{Binding AddTableCommand}" />
         <Button
             Grid.Row="5"
             Grid.Column="3"
-            Content="Save"
-            Visibility="{Binding IsSaveButtonVisible, Converter={StaticResource BoolToVisibility}, Mode=OneTime}"
-            Command="{Binding UpdateTableCommand}"/>
+            Content="{x:Static resx:Resources.TableCreateEditWindow_SaveButton_Label}"
+            Visibility="{Binding IsSaveButtonVisible, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneTime}"
+            Command="{Binding UpdateTableCommand}" />
     </Grid>
 </Window>

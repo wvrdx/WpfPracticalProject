@@ -2,12 +2,8 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
-using WpfPracticalProject.Common.Converters;
-using WpfPracticalProject.Common.Helpers;
 using WpfPracticalProject.Models;
 using WpfPracticalProject.ViewModels;
 using WpfPracticalProject.Windows;
@@ -19,8 +15,8 @@ namespace WpfPracticalProject.UserControls
     /// </summary>
     public partial class TablesListUserControl : UserControl
     {
-        private readonly TablesListViewModel _vm;
         private readonly ObservableCollection<Column> _currentColumnsList;
+        private readonly TablesListViewModel _vm;
 
         public TablesListUserControl()
         {
@@ -29,7 +25,6 @@ namespace WpfPracticalProject.UserControls
             _currentColumnsList = _vm.AvailableListedColumns;
             if (_currentColumnsList != null)
                 foreach (var column in _currentColumnsList)
-                {
                     if (column.Type == "TextBox")
                     {
                         var gc = GenerateTextboxColumn(column);
@@ -40,13 +35,14 @@ namespace WpfPracticalProject.UserControls
                         var gc = GenerateComboBoxColumn(column);
                         tablesDataDrid.Columns.Add(gc);
                     }
-                }
+
             DataContext = _vm;
+            var resources = Resources;
         }
 
         private void Edit_Button_Click(object sender, RoutedEventArgs e)
         {
-            var SelectedTable = (TableToView)tablesDataDrid.SelectedItem;
+            var SelectedTable = (TableToView) tablesDataDrid.SelectedItem;
             var SelectedTableIndex = tablesDataDrid.SelectedIndex;
             var m = new TableCreationEditingWindow(SelectedTable);
             m.ShowDialog();
@@ -66,7 +62,7 @@ namespace WpfPracticalProject.UserControls
 
         private void Delete_Button_Click(object sender, RoutedEventArgs e)
         {
-            var SelectedTable = (TableToView)tablesDataDrid.SelectedItem;
+            var SelectedTable = (TableToView) tablesDataDrid.SelectedItem;
             var m = new TableDeletionWindow(SelectedTable);
             m.ShowDialog();
             if (m.DialogResult.HasValue && m.DialogResult.Value)
@@ -75,7 +71,7 @@ namespace WpfPracticalProject.UserControls
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedItems = ((ListBox)sender).SelectedItems.Cast<string>();
+            var selectedItems = ((ListBox) sender).SelectedItems.Cast<string>();
             if (selectedItems != null) _vm.SetColumnVisibility(selectedItems);
         }
 
@@ -86,13 +82,14 @@ namespace WpfPracticalProject.UserControls
                 Header = column.Header,
                 Width = column.Width,
                 Visibility = column.Visibility,
-                IsReadOnly = column.IsReadOnly,
+                IsReadOnly = column.IsReadOnly
             };
             if (column.StyleKey != null)
             {
                 var style = FindResource(column.StyleKey) as Style;
                 gc.CellStyle = style;
             }
+
             gc.Binding = new Binding
             {
                 Path = new PropertyPath(column.DataField),
@@ -107,13 +104,14 @@ namespace WpfPracticalProject.UserControls
             {
                 Header = column.Header,
                 Width = column.Width,
-                IsReadOnly = column.IsReadOnly,
+                IsReadOnly = column.IsReadOnly
             };
             if (column.StyleKey != null)
             {
                 var style = FindResource(column.StyleKey) as Style;
                 gc.CellStyle = style;
             }
+
             gc.SelectedItemBinding = new Binding
             {
                 Path = new PropertyPath(column.DataField),
@@ -126,9 +124,11 @@ namespace WpfPracticalProject.UserControls
             //gc.EditingElementStyle = editingElementStyle;
             return gc;
         }
-        private void OnComboboxSelectionChanged (object sender, SelectionChangedEventArgs e)
+
+        private void OnComboboxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedRow = (DataGridRow)tablesDataDrid.ItemContainerGenerator.ContainerFromIndex(tablesDataDrid.SelectedIndex);
+            var selectedRow =
+                (DataGridRow) tablesDataDrid.ItemContainerGenerator.ContainerFromIndex(tablesDataDrid.SelectedIndex);
             FocusManager.SetIsFocusScope(selectedRow, true);
             FocusManager.SetFocusedElement(selectedRow, selectedRow);
         }

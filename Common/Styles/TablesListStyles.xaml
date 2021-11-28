@@ -1,15 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:convs="clr-namespace:WpfPracticalProject.Common.Converters">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary
             Source="/WpfPracticalProject;component/Common/Styles/GlobalStyles.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    <convs:ColumnToComboBoxElementConverter
-        x:Key="ColumnToComboBoxElementConverter" />
-    <convs:ColumnToSelectedColumnsConverter
-        x:Key="ColumnToSelectedColumnsConverter" />
     <Style
         TargetType="TextBlock" />
     <Style

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using WpfPracticalProject.Common;
 using WpfPracticalProject.Models;
 
@@ -11,13 +10,13 @@ namespace WpfPracticalProject.ViewModels
     {
         private readonly int _activeTableId;
         private string _activeTableName;
-        private string _validationMessage;
-        private bool _isNameValid;
         private TableType _activeTableType;
         private int _activeTableTypeIndex;
         private RelayCommand _addTableCommand;
+        private bool _isNameValid;
         private List<TableType> _typesList;
         private RelayCommand _updateTableCommand;
+        private string _validationMessage;
 
         public TableCreateEditingViewModel()
         {
@@ -36,14 +35,15 @@ namespace WpfPracticalProject.ViewModels
             _activeTableId = selectedTable.Id;
             WindowTitle = $"Edit Table \"{_activeTableName}\"";
             var tableType = (from t in TypesList
-                             where t.Id.Equals(selectedTable.TableTypeId)
-                             select t).First();
+                where t.Id.Equals(selectedTable.TableTypeId)
+                select t).First();
             _activeTableTypeIndex = _typesList.IndexOf(tableType);
         }
 
         public bool IsAddButtonVisible { get; }
 
         public bool IsSaveButtonVisible { get; }
+
         public bool IsNameValid
         {
             get => _isNameValid;

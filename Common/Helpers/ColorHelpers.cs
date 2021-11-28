@@ -8,8 +8,8 @@ namespace WpfPracticalProject.Common.Helpers
 
         public static Color InvertColor(Color colorToInvert)
         {
-            return Color.FromArgb(colorToInvert.A, (byte)(RGBMAX - colorToInvert.R),
-                (byte)(RGBMAX - colorToInvert.G), (byte)(RGBMAX - colorToInvert.B));
+            return Color.FromArgb(colorToInvert.A, (byte) (RGBMAX - colorToInvert.R),
+                (byte) (RGBMAX - colorToInvert.G), (byte) (RGBMAX - colorToInvert.B));
         }
     }
 }

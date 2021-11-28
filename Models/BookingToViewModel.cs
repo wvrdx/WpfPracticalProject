@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfPracticalProject.Models
 {
-    class BookingToView
+    public class BookingToView
     {
         public int Id { get; set; }
         public int TableId { get; set; }

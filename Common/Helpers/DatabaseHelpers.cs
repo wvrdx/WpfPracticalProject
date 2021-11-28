@@ -19,26 +19,26 @@ namespace WpfPracticalProject.Common.Helpers
                 var loadedTableTypes = db.TableTypes.Local.ToList();
                 var loadedTableStatuses = db.TableStatuses.Local.ToList();
                 return new ObservableCollection<TableToView>(loadedTables.Select(iteratedTable => new TableToView
-                {
-                    Id = iteratedTable.Id,
-                    TableName = iteratedTable.TableName,
-                    TableTypeId = (from type in loadedTableTypes
-                                   where type.Id.Equals(iteratedTable.TypeId)
-                                   select type.Id).First(),
-                    TableType = (from type in loadedTableTypes
-                                 where type.Id.Equals(iteratedTable.TypeId)
-                                 select type.TypeName).First().ToString(),
-                    TableRate = (from type in loadedTableTypes
-                                 where type.Id.Equals(iteratedTable.TypeId)
-                                 select type.Rate).First().ToString(),
-                    TableStatusId = (from status in loadedTableStatuses
-                                     where status.Id.Equals(iteratedTable.StatusId)
-                                     select status.Id).First(),
-                    TableStatus =
+                    {
+                        Id = iteratedTable.Id,
+                        TableName = iteratedTable.TableName,
+                        TableTypeId = (from type in loadedTableTypes
+                            where type.Id.Equals(iteratedTable.TypeId)
+                            select type.Id).First(),
+                        TableType = (from type in loadedTableTypes
+                            where type.Id.Equals(iteratedTable.TypeId)
+                            select type.TypeName).First().ToString(),
+                        TableRate = (from type in loadedTableTypes
+                            where type.Id.Equals(iteratedTable.TypeId)
+                            select type.Rate).First().ToString(),
+                        TableStatusId = (from status in loadedTableStatuses
+                            where status.Id.Equals(iteratedTable.StatusId)
+                            select status.Id).First(),
+                        TableStatus =
                             (from status in loadedTableStatuses
-                             where status.Id.Equals(iteratedTable.StatusId)
-                             select status.StatusName).First().ToString()
-                })
+                                where status.Id.Equals(iteratedTable.StatusId)
+                                select status.StatusName).First().ToString()
+                    })
                     .ToList());
             }
         }
@@ -61,6 +61,37 @@ namespace WpfPracticalProject.Common.Helpers
                 tableFromDB.TableName = tableToUpdate.TableName;
                 db.SaveChanges();
             }
+        }
+
+        public static List<BookingToView> GetTableBookings(TableToView selectedTable)
+        {
+            var toReturn = new List<BookingToView>();
+            using (var db = new AppDataBaseContext())
+            {
+                var _loadedBookings =
+                    (from i in db.Bookings
+                        where i.TableId == selectedTable.Id && i.BookingStatusId != 3 && i.BookingStatusId != 4
+                        select i).ToList();
+                foreach (var tableBooking in _loadedBookings)
+                {
+                    var tableBookingToView = new BookingToView
+                    {
+                        Id = tableBooking.Id,
+                        TableId = selectedTable.Id,
+                        TableName = selectedTable.TableName,
+                        BookerId = tableBooking.BookerId,
+                        BookerName = (from i in db.Clients where i.Id == tableBooking.BookerId select i.ClientName)
+                            .ToString(),
+                        BookingStatusId = tableBooking.BookingStatusId,
+                        BookingStatusName =
+                            (from i in db.BookingStatuses where i.Id == tableBooking.BookingStatusId select i.StausName)
+                            .ToString()
+                    };
+                    toReturn.Add(tableBookingToView);
+                }
+            }
+
+            return toReturn;
         }
     }
 }

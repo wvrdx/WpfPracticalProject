@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
-using WpfPracticalProject.Common.Helpers;
 using WpfPracticalProject.Models;
 
 namespace WpfPracticalProject.Common.Templates
@@ -42,7 +41,8 @@ namespace WpfPracticalProject.Common.Templates
             return dataTemplateToReturn;
         }
 
-        public static DataTemplate TableStatusCellDataTemplate(Dictionary<string, Color> statusColorsMap, string bindedProperty)
+        public static DataTemplate TableStatusCellDataTemplate(Dictionary<string, Color> statusColorsMap,
+            string bindedProperty)
         {
             var dataTemplateToReturn = new DataTemplate();
             var textBlockFactory = new FrameworkElementFactory(typeof(TextBlock));
@@ -62,6 +62,7 @@ namespace WpfPracticalProject.Common.Templates
                 statusColorTrigger.Setters.Add(statusBackgroundColorSetter);
                 textBlockStyle.Triggers.Add(statusColorTrigger);
             }
+
             textBlockFactory.SetValue(FrameworkElement.StyleProperty, textBlockStyle);
             textBlockFactory.SetBinding(TextBlock.TextProperty, new Binding(bindedProperty));
             dataTemplateToReturn.VisualTree = textBlockFactory;
